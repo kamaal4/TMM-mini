@@ -7,14 +7,18 @@
 
 import SwiftUI
 import CoreData
+import Foundation
 
 @main
 struct TMM_MiniApp: App {
     let persistenceController = PersistenceController.shared
 
+    init() {
+    }
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
                 .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }

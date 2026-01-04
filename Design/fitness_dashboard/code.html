@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fitness Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13eca4",
+                        "primary-dark": "#0ba876",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#101010", // Deep black/charcoal
+                        "card-dark": "#1c1c1e", // iOS-like dark gray card
+                        "text-secondary": "#9CA3AF",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.375rem",
+                        "lg": "0.75rem",
+                        "xl": "1rem",
+                        "2xl": "1.5rem",
+                        "3xl": "2rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+<style>
+        /* Custom scrollbar for better aesthetic */
+        ::-webkit-scrollbar {
+            width: 0px;
+            background: transparent;
+        }
+        /* Shimmer animation for loading states */
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+        .animate-shimmer {
+            background: linear-gradient(90deg, rgba(255,255,255,0.05) 25%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0.05) 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-white antialiased selection:bg-primary selection:text-black">
+<div class="mx-auto max-w-md w-full min-h-screen relative flex flex-col overflow-hidden shadow-2xl bg-background-light dark:bg-background-dark">
+<!-- Header -->
+<header class="flex items-center justify-between px-6 pt-12 pb-4 z-20 sticky top-0 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<div class="flex items-center gap-3">
+<div class="relative group cursor-pointer">
+<div class="size-10 rounded-full overflow-hidden border-2 border-primary shadow-[0_0_12px_rgba(19,236,164,0.3)]">
+<img alt="User profile portrait" class="w-full h-full object-cover" data-alt="User profile portrait" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCFQYjy0y3OLH3s6wVUOG4XeQW09O2t89FJZRbR9RGB5ToBhNHIpYtrGn1PMCzHl_ISYAW90ebhK-1VuZTFqeMUMT_5QpbYhkhpV1MVAQN5YlJ3sKbmYB3AGzsbdSJkSDNtl1nwhHMLfDIy_voVIrc96gEyv3cVp-9jg5GjAyR7xlsfpItC8Pj_gxbIiBIcgzUVEe9K5kKVN3YprD2gksJilCf4ZQJqXq-WM6e1z53a-VqxaEm9UUafhYSy5T7p5be8Lviqk3VCZzs"/>
+</div>
+<div class="absolute bottom-0 right-0 size-3 bg-primary rounded-full border-2 border-background-dark"></div>
+</div>
+<div>
+<h2 class="text-xs font-semibold text-text-secondary uppercase tracking-wider">Hello, Alex</h2>
+<h1 class="text-lg font-bold leading-none">Today</h1>
+</div>
+</div>
+<button class="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/10 hover:bg-primary/20 transition-colors border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[18px]">bolt</span>
+<span class="text-xs font-bold text-primary">Simulate Goal</span>
+</button>
+</header>
+<!-- Main Content Scroll Area -->
+<main class="flex-1 px-5 pb-24 flex flex-col gap-6 overflow-y-auto">
+<!-- Hero Progress Section (Circular) -->
+<section class="flex flex-col items-center justify-center pt-2">
+<div class="relative size-64 flex items-center justify-center">
+<!-- Background Circle -->
+<svg class="w-full h-full transform -rotate-90 drop-shadow-lg" viewbox="0 0 200 200">
+<circle cx="100" cy="100" fill="none" r="85" stroke="#27272a" stroke-linecap="round" stroke-width="12"></circle>
+<!-- Progress Circle (75% filled) -->
+<circle class="drop-shadow-[0_0_10px_rgba(19,236,164,0.5)] transition-all duration-1000 ease-out" cx="100" cy="100" fill="none" r="85" stroke="#13eca4" stroke-dasharray="534" stroke-dashoffset="133" stroke-linecap="round" stroke-width="12"></circle>
+</svg>
+<!-- Inner Content -->
+<div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+<span class="material-symbols-outlined text-primary/80 text-4xl mb-1">directions_run</span>
+<div class="text-5xl font-extrabold tracking-tighter text-white tabular-nums leading-none mb-1">8,432</div>
+<p class="text-text-secondary font-medium text-sm">of 10,000 steps</p>
+</div>
+<!-- Decorative elements -->
+<div class="absolute top-4 right-10 size-2 bg-primary/50 rounded-full animate-pulse"></div>
+<div class="absolute bottom-10 left-8 size-1.5 bg-primary/30 rounded-full"></div>
+</div>
+</section>
+<!-- Metrics Grid -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Active Calories -->
+<div class="bg-card-dark rounded-2xl p-5 border border-white/5 flex flex-col gap-3 relative overflow-hidden group hover:border-primary/30 transition-colors">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">local_fire_department</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="p-1.5 bg-orange-500/20 rounded-lg">
+<span class="material-symbols-outlined text-orange-500 text-sm">local_fire_department</span>
+</div>
+<span class="text-sm font-semibold text-text-secondary">Calories</span>
+</div>
+<div>
+<span class="text-2xl font-bold text-white tabular-nums">450</span>
+<span class="text-xs text-text-secondary font-medium ml-1">kcal</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full mt-auto">
+<div class="bg-orange-500 h-1.5 rounded-full" style="width: 75%"></div>
+</div>
+</div>
+<!-- Nutrition/Food -->
+<div class="bg-card-dark rounded-2xl p-5 border border-white/5 flex flex-col gap-3 relative overflow-hidden group hover:border-primary/30 transition-colors">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-blue-500">nutrition</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="p-1.5 bg-blue-500/20 rounded-lg">
+<span class="material-symbols-outlined text-blue-500 text-sm">restaurant</span>
+</div>
+<span class="text-sm font-semibold text-text-secondary">Intake</span>
+</div>
+<div>
+<span class="text-2xl font-bold text-white tabular-nums">1,200</span>
+<span class="text-xs text-text-secondary font-medium ml-1">kcal</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full mt-auto">
+<div class="bg-blue-500 h-1.5 rounded-full" style="width: 60%"></div>
+</div>
+</div>
+</section>
+<!-- Weekly Trend Chart -->
+<section class="bg-card-dark rounded-3xl p-6 border border-white/5">
+<div class="flex items-center justify-between mb-6">
+<div>
+<h3 class="text-base font-bold text-white">Activity Trend</h3>
+<p class="text-xs text-text-secondary mt-0.5">Last 7 Days</p>
+</div>
+<!-- Custom Segmented Control -->
+<div class="flex bg-black/40 p-1 rounded-lg">
+<button class="px-3 py-1.5 rounded-md bg-white/10 text-white text-xs font-bold shadow-sm transition-all">Steps</button>
+<button class="px-3 py-1.5 rounded-md text-text-secondary hover:text-white text-xs font-medium transition-all">Cals</button>
+</div>
+</div>
+<!-- Chart Bars -->
+<div class="flex items-end justify-between h-32 gap-2 px-1">
+<!-- Day 1 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/30 h-[40%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">M</span>
+</div>
+<!-- Day 2 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/40 h-[65%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">T</span>
+</div>
+<!-- Day 3 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/30 h-[35%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">W</span>
+</div>
+<!-- Day 4 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary h-[85%] rounded-t-sm shadow-[0_0_15px_rgba(19,236,164,0.3)]"></div>
+</div>
+<span class="text-[10px] font-bold text-white">T</span>
+</div>
+<!-- Day 5 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/50 h-[70%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">F</span>
+</div>
+<!-- Day 6 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/40 h-[55%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">S</span>
+</div>
+<!-- Day 7 -->
+<div class="flex flex-col items-center gap-2 w-full group cursor-pointer">
+<div class="relative w-full max-w-[24px] bg-white/5 rounded-t-sm h-full flex items-end overflow-hidden group-hover:bg-white/10 transition-colors">
+<div class="w-full bg-primary/60 h-[75%] rounded-t-sm group-hover:bg-primary transition-colors"></div>
+</div>
+<span class="text-[10px] font-bold text-text-secondary group-hover:text-primary">S</span>
+</div>
+</div>
+</section>
+<!-- Insight Cards -->
+<section class="grid grid-cols-2 gap-4">
+<div class="bg-card-dark rounded-2xl p-5 border border-white/5 flex flex-col gap-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-text-secondary uppercase tracking-wider">Best Day</span>
+<span class="material-symbols-outlined text-yellow-500 text-lg">emoji_events</span>
+</div>
+<p class="text-sm font-medium text-white">Friday</p>
+<p class="text-lg font-bold text-primary tabular-nums">12,400</p>
+<p class="text-[10px] text-text-secondary">Steps</p>
+</div>
+<div class="bg-card-dark rounded-2xl p-5 border border-white/5 flex flex-col gap-1">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-bold text-text-secondary uppercase tracking-wider">7-Day Avg</span>
+<span class="material-symbols-outlined text-primary text-lg">trending_up</span>
+</div>
+<p class="text-sm font-medium text-white">Average</p>
+<p class="text-lg font-bold text-white tabular-nums">9,200</p>
+<p class="text-[10px] text-text-secondary">Steps/day</p>
+</div>
+</section>
+<!-- Error State Example (Hidden by default, shown for completeness request) -->
+<!-- 
+            <section class="bg-red-500/10 border border-red-500/20 rounded-2xl p-4 flex items-start gap-3">
+                <span class="material-symbols-outlined text-red-500 shrink-0">error</span>
+                <div>
+                    <h4 class="text-red-500 font-bold text-sm">Health Access Denied</h4>
+                    <p class="text-red-400/80 text-xs mt-1 leading-relaxed">Please enable HealthKit permissions in Settings to view your real-time step data.</p>
+                    <button class="mt-2 text-xs font-bold text-red-500 hover:text-white transition-colors">Open Settings</button>
+                </div>
+            </section> 
+            -->
+<div class="h-6"></div> <!-- Spacer -->
+</main>
+<!-- Bottom Navigation (iOS Style Glassmorphism) -->
+<nav class="absolute bottom-0 w-full bg-background-dark/80 backdrop-blur-xl border-t border-white/5 px-6 pb-8 pt-4 flex justify-between items-center z-50">
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-primary text-2xl group-hover:scale-110 transition-transform filled font-variation-settings-fill">home</span>
+<span class="text-[10px] font-bold text-primary">Summary</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-text-secondary text-2xl group-hover:text-white transition-colors">fitness_center</span>
+<span class="text-[10px] font-medium text-text-secondary group-hover:text-white transition-colors">Workouts</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<div class="relative">
+<span class="material-symbols-outlined text-text-secondary text-2xl group-hover:text-white transition-colors">notifications</span>
+<div class="absolute top-0 right-0 size-2 bg-red-500 rounded-full border border-background-dark"></div>
+</div>
+<span class="text-[10px] font-medium text-text-secondary group-hover:text-white transition-colors">Alerts</span>
+</a>
+<a class="flex flex-col items-center gap-1 group" href="#">
+<span class="material-symbols-outlined text-text-secondary text-2xl group-hover:text-white transition-colors">person</span>
+<span class="text-[10px] font-medium text-text-secondary group-hover:text-white transition-colors">Profile</span>
+</a>
+</nav>
+<!-- Inline CSS for specific fill requirement on active icon -->
+<style>
+            .font-variation-settings-fill {
+                font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            }
+        </style>
+</div>
+</body></html>

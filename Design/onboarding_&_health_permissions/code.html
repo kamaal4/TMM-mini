@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Onboarding &amp; Health Permissions</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Theme Configuration -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13eca4",
+                        "background-light": "#f6f8f7",
+                        "background-dark": "#10221c",
+                        "surface-dark": "#1a2e26",
+                    },
+                    fontFamily: {
+                        "display": ["Manrope", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem", 
+                        "lg": "0.5rem", 
+                        "xl": "0.75rem", 
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'neon': '0 0 20px -5px rgba(19, 236, 164, 0.4)',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 1,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        /* Custom scrollbar hide */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background-light dark:bg-background-dark font-display antialiased text-slate-900 dark:text-white transition-colors duration-200">
+<div class="relative flex h-full min-h-screen w-full flex-col overflow-x-hidden max-w-md mx-auto shadow-2xl">
+<!-- TopAppBar -->
+<div class="flex items-center p-4 pb-2 justify-between sticky top-0 z-10 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-md">
+<button class="text-slate-900 dark:text-white flex size-10 shrink-0 items-center justify-center rounded-full hover:bg-slate-200 dark:hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined">arrow_back</span>
+</button>
+<h2 class="text-slate-900 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em] text-center">Health Access</h2>
+<div class="size-10"></div> <!-- Spacer for centering title -->
+</div>
+<!-- PageIndicators -->
+<div class="flex w-full flex-row items-center justify-center gap-3 py-4">
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+<div class="h-2 w-6 rounded-full bg-primary shadow-neon"></div>
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+<div class="h-2 w-2 rounded-full bg-primary/30"></div>
+</div>
+<!-- Main Scrollable Content -->
+<div class="flex-1 flex flex-col px-6">
+<!-- Hero Visual -->
+<div class="flex flex-col items-center justify-center py-8">
+<div class="relative flex items-center justify-center size-32 rounded-full bg-surface-dark border border-white/5 shadow-2xl">
+<div class="absolute inset-0 rounded-full bg-primary/10 blur-xl"></div>
+<span class="material-symbols-outlined text-primary text-[64px] relative z-10 drop-shadow-[0_0_15px_rgba(19,236,164,0.5)]">
+                        ecg_heart
+                    </span>
+<!-- Decorative pulsing ring -->
+<div class="absolute inset-0 rounded-full border border-primary/20 animate-[ping_3s_ease-in-out_infinite]"></div>
+</div>
+</div>
+<!-- HeadlineText -->
+<div class="flex flex-col gap-2 text-center mb-6">
+<h1 class="text-slate-900 dark:text-white tracking-tight text-[32px] font-extrabold leading-tight">
+                    Sync Your <span class="text-primary">Health Data</span>
+</h1>
+<p class="text-slate-500 dark:text-slate-400 text-base font-medium leading-relaxed px-2">
+                    To provide accurate insights and personalized calorie goals, we need to sync with your Apple Health data.
+                </p>
+</div>
+<!-- Benefit Bullets -->
+<div class="flex flex-col gap-4 mb-8">
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center size-6 shrink-0 rounded-full bg-primary/10 mt-0.5">
+<span class="material-symbols-outlined text-primary text-sm">check</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Accurate Step Counting</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Automatically import steps without draining battery.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="flex items-center justify-center size-6 shrink-0 rounded-full bg-primary/10 mt-0.5">
+<span class="material-symbols-outlined text-primary text-sm">bolt</span>
+</div>
+<div>
+<h3 class="text-slate-900 dark:text-white font-bold text-base">Real-time Active Energy</h3>
+<p class="text-slate-500 dark:text-slate-400 text-sm">Precise calorie burn calculation from workouts.</p>
+</div>
+</div>
+</div>
+<!-- Visual Toggles (Simulation) -->
+<div class="bg-surface-dark rounded-xl p-4 border border-white/5 mb-8 space-y-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-background-dark flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">footprint</span>
+</div>
+<span class="text-white font-semibold">Steps</span>
+</div>
+<!-- Toggle ON state -->
+<div class="w-12 h-7 bg-primary rounded-full relative cursor-default">
+<div class="absolute right-1 top-1 size-5 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+<div class="w-full h-px bg-white/5"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="size-10 rounded-lg bg-background-dark flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">local_fire_department</span>
+</div>
+<span class="text-white font-semibold">Active Energy</span>
+</div>
+<!-- Toggle ON state -->
+<div class="w-12 h-7 bg-primary rounded-full relative cursor-default">
+<div class="absolute right-1 top-1 size-5 bg-white rounded-full shadow-sm"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Sticky Footer CTA -->
+<div class="p-6 pt-2 bg-background-light dark:bg-background-dark mt-auto">
+<button class="w-full h-14 bg-primary hover:bg-[#0fd693] active:scale-[0.98] transition-all rounded-xl flex items-center justify-center shadow-neon group">
+<span class="text-background-dark font-bold text-lg mr-2">Connect Health</span>
+<span class="material-symbols-outlined text-background-dark transition-transform group-hover:translate-x-1">arrow_forward</span>
+</button>
+<div class="flex items-center justify-center gap-1.5 mt-4 opacity-60">
+<span class="material-symbols-outlined text-xs text-slate-500 dark:text-slate-400">lock</span>
+<p class="text-xs text-slate-500 dark:text-slate-400 text-center">
+                    Your data stays on your device and is never sold.
+                </p>
+</div>
+</div>
+<!-- DEMO SECTION: Limited Mode State -->
+<!-- This section demonstrates the "Denied" state as requested by the prompt -->
+<div class="px-6 py-8 border-t border-white/10 bg-surface-dark/50">
+<p class="text-xs text-slate-400 uppercase tracking-widest font-bold mb-4 text-center">Design Variant: Limited Mode State</p>
+<div class="bg-red-500/10 border border-red-500/30 rounded-xl p-5 relative overflow-hidden">
+<div class="flex gap-4 items-start">
+<div class="shrink-0 size-10 rounded-full bg-red-500/20 flex items-center justify-center text-red-400">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<div class="flex-1">
+<h4 class="text-white font-bold mb-1">Limited Mode Active</h4>
+<p class="text-slate-400 text-sm leading-snug mb-4">
+                            Without health access, automatic tracking is disabled. Please enable permissions in Settings to use premium features.
+                        </p>
+<div class="flex gap-3">
+<button class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-4 py-2 rounded-lg transition-colors">
+                                Open Settings
+                            </button>
+<button class="bg-transparent hover:bg-white/5 text-slate-300 text-sm font-medium px-4 py-2 rounded-lg transition-colors border border-white/10">
+                                Retry
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="h-8 bg-background-light dark:bg-background-dark"></div>
+</div>
+</body></html>
