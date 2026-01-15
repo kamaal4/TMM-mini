@@ -136,50 +136,50 @@ struct NutritionLogView: View {
             // Floating Action Buttons
             VStack {
                 Spacer()
-                HStack {
+                HStack(spacing: Spacing.md) {
                     Spacer()
-                    VStack(spacing: Spacing.md) {
-                        // Log Meal Button
-                        Button(action: {
-                            viewModel.showMealForm = true
-                            HapticManager.impact(style: .light)
-                        }) {
-                            HStack(spacing: Spacing.sm) {
-                                Image(systemName: "plus")
-                                    .font(.system(size: 20, weight: .bold))
-                                Text("Log Meal")
-                                    .font(.headline)
-                            }
-                            .foregroundColor(.backgroundDark)
-                            .frame(height: 56)
-                            .padding(.horizontal, Spacing.lg)
-                            .background(Color.primaryColor)
-                            .cornerRadius(CornerRadius.full)
-                            .primaryShadow()
-                        }
-                        .accessibilityLabel("Log meal")
-                        .accessibilityHint("Double tap to open meal entry form")
-                        
-                        // Scan Button
-                        Button(action: {
-                            showScanView = true
-                        }) {
-                            Image(systemName: "barcode.viewfinder")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .frame(width: 56, height: 56)
-                                .background(AppTheme.cardColor)
-                                .cornerRadius(28)
-                                .overlay(
-                                    Circle()
-                                        .stroke(Color.white.opacity(0.1), lineWidth: 1)
-                                )
-                                .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
-                        }
+                    
+                    // Scan Button (compact)
+                    Button(action: {
+                        showScanView = true
+                    }) {
+                        Image(systemName: "barcode.viewfinder")
+                            .font(.system(size: 20))
+                            .foregroundColor(AppTheme.textPrimary)
+                            .frame(width: 48, height: 48)
+                            .background(AppTheme.cardColor)
+                            .cornerRadius(24)
+                            .overlay(
+                                Circle()
+                                    .stroke(AppTheme.cardStroke, lineWidth: 1)
+                            )
+                            .shadow(color: Color.black.opacity(0.15), radius: 6, x: 0, y: 3)
                     }
-                    .padding(.trailing, Spacing.lg)
-                    .padding(.bottom, Spacing.xl)
+                    .accessibilityLabel("Scan barcode")
+                    
+                    // Log Meal Button (primary)
+                    Button(action: {
+                        viewModel.showMealForm = true
+                        HapticManager.impact(style: .light)
+                    }) {
+                        HStack(spacing: Spacing.sm) {
+                            Image(systemName: "plus")
+                                .font(.system(size: 18, weight: .bold))
+                            Text("Log Meal")
+                                .font(.headline)
+                        }
+                        .foregroundColor(.backgroundDark)
+                        .frame(height: 48)
+                        .padding(.horizontal, Spacing.lg)
+                        .background(Color.primaryColor)
+                        .cornerRadius(CornerRadius.full)
+                        .primaryShadow()
+                    }
+                    .accessibilityLabel("Log meal")
+                    .accessibilityHint("Double tap to open meal entry form")
                 }
+                .padding(.horizontal, Spacing.lg)
+                .padding(.bottom, Spacing.lg)
             }
             
             // Bottom Sheet
@@ -193,7 +193,9 @@ struct NutritionLogView: View {
             }
         }
         .sheet(isPresented: $showScanView) {
-            ScanPlaceholderView(isPresented: $showScanView)
+            ScannerView(isPresented: $showScanView) { code in
+                viewModel.handleScannedCode(code)
+            }
         }
         .onAppear {
             viewModel.loadMeals()

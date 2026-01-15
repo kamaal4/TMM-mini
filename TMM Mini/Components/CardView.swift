@@ -32,7 +32,7 @@ struct CardView<Content: View>: View {
             .cornerRadius(cornerRadius)
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
-                    .stroke(Color.white.opacity(0.05), lineWidth: 1)
+                    .stroke(AppTheme.cardStroke, lineWidth: 1)
             )
     }
 }

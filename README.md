@@ -188,6 +188,17 @@ The architecture can handle frequent updates without UI lag, demonstrating readi
 - [ ] Dark mode works throughout
 - [ ] Accessibility (VoiceOver) works
 
+## Video / Interview Cheat Sheet
+
+Use this section as a quick script when recording the walkthrough or answering questions:
+
+- **Story in 20s**: “TMM Mini is a premium SwiftUI dashboard that syncs steps and active energy from Apple Health, caches offline, and adds a fast nutrition log.”
+- **Key flows to show**: Onboarding with value statement and benefits, Connect Health permission, Limited Mode retry, Dashboard (ring + 7-day chart + insights + goal celebration), Nutrition Log (validation + list + scan placeholder).
+- **Architecture highlights**: MVVM, `HealthKitServiceProtocol` abstraction, `HealthDataRepository` for caching, CoreData for offline, stitched design system components.
+- **Performance & bonus**: Incremental HealthKit updates with anchor storage, throttled UI updates, cached-first loading.
+- **Privacy**: Reads HealthKit only; data stays on-device.
+- **Files to reference**: `OnboardingView.swift`, `DashboardView.swift`, `NutritionLogView.swift`, `HealthKitManager.swift`, `HealthDataRepository.swift`, `DesignSystem.swift`.
+
 ### Known Limitations
 
 - Requires physical device (HealthKit doesn't work in simulator)

@@ -118,15 +118,27 @@ struct DashboardView: View {
                                     valueColor: .primaryColor
                                 )
                                 
-                                InsightCard(
-                                    title: "7-Day Avg",
-                                    subtitle: "Average",
-                                    value: "\(viewModel.weeklyAverage)",
-                                    unit: "Steps/day",
-                                    icon: "chart.line.uptrend.xyaxis",
-                                    iconColor: .primaryColor,
-                                    valueColor: AppTheme.textPrimary
-                                )
+                                if let comparison = viewModel.weeklyComparisonText {
+                                    InsightCard(
+                                        title: "vs Last Week",
+                                        subtitle: comparison.isAhead ? "Ahead" : "Behind",
+                                        value: comparison.text,
+                                        unit: "",
+                                        icon: comparison.isAhead ? "arrow.up.right.circle.fill" : "arrow.down.right.circle.fill",
+                                        iconColor: comparison.isAhead ? .green.opacity(0.8) : .orange.opacity(0.8),
+                                        valueColor: comparison.isAhead ? .green : .orange
+                                    )
+                                } else {
+                                    InsightCard(
+                                        title: "7-Day Avg",
+                                        subtitle: "Average",
+                                        value: "\(viewModel.weeklyAverage)",
+                                        unit: "Steps/day",
+                                        icon: "chart.line.uptrend.xyaxis",
+                                        iconColor: .primaryColor,
+                                        valueColor: AppTheme.textPrimary
+                                    )
+                                }
                             }
                             .padding(.horizontal, Spacing.lg)
                         }
@@ -252,6 +264,7 @@ struct GoalCelebrationView: View {
             .scaleEffect(scale)
         }
         .onAppear {
+            HapticManager.notification(type: .success)
             withAnimation(.spring(response: 0.5, dampingFraction: 0.6)) {
                 scale = 1.0
                 opacity = 1.0

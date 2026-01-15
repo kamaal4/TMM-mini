@@ -91,5 +91,30 @@ class NutritionLogViewModel: ObservableObject {
     func resetForm() {
         formData = MealFormData()
     }
+    
+    func handleScannedCode(_ code: String) {
+        // Simulate a product lookup
+        // In a real app, we would query a database
+        if code.contains("8906112995413") || code.contains("8906") {
+            // Match for the bread packet in the demo
+            formData = MealFormData(
+                name: "Whole Wheat Bread (2 Slices)",
+                calories: "135",
+                protein: "11",
+                carbs: "21",
+                fat: "1"
+            )
+        } else {
+            // Generic fallback
+            formData = MealFormData(
+                name: "Scanned Item \(code.prefix(4))",
+                calories: "350",
+                protein: "12",
+                carbs: "45",
+                fat: "10"
+            )
+        }
+        showMealForm = true
+    }
 }
 

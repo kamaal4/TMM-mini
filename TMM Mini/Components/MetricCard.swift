@@ -54,7 +54,7 @@ struct MetricCard: View {
                 GeometryReader { geometry in
                     ZStack(alignment: .leading) {
                         Rectangle()
-                            .fill(Color.white.opacity(0.1))
+                            .fill(AppTheme.mutedFill)
                             .frame(height: 6)
                             .cornerRadius(3)
                         

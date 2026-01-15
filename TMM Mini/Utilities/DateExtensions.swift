@@ -36,6 +36,12 @@ extension Date {
         return (0..<7).map { today.daysAgo(6 - $0) }
     }
     
+    static func datesForPreviousWeek() -> [Date] {
+        let today = Date()
+        // Previous week: 7-13 days ago (older to newer)
+        return Array((7..<14).map { today.daysAgo($0) }.reversed())
+    }
+    
     var weekdayShort: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "E"

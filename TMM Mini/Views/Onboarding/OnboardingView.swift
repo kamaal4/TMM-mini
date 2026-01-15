@@ -71,15 +71,15 @@ struct OnboardingView: View {
                     // Headline Text
                     VStack(spacing: Spacing.sm) {
                         HStack(spacing: 0) {
-                            Text("Sync Your ")
+                            Text("Own Your ")
                                 .font(.displayLarge)
                                 .foregroundColor(AppTheme.textPrimary)
-                            Text("Health Data")
+                            Text("Daily Wins")
                                 .font(.displayLarge)
                                 .foregroundColor(.primaryColor)
                         }
                         
-                        Text("To provide accurate insights and personalized calorie goals, we need to sync with your Apple Health data.")
+                        Text("Get clear, motivating insights powered by your Apple Health data—kept private on your device.")
                             .font(.body)
                             .foregroundColor(AppTheme.textSecondary)
                             .multilineTextAlignment(.center)
@@ -101,6 +101,12 @@ struct OnboardingView: View {
                             icon: "bolt.fill",
                             title: "Real-time Active Energy",
                             description: "Precise calorie burn calculation from workouts."
+                        )
+                        
+                        BenefitRow(
+                            icon: "shield.checkerboard",
+                            title: "Privacy First",
+                            description: "Data stays on your device—never sold or shared."
                         )
                     }
                     .padding(.horizontal, Spacing.lg)

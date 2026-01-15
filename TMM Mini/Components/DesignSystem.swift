@@ -18,7 +18,7 @@ extension Color {
     static let cardDarkAlt = Color(hex: "1c322a")
     static let surfaceDark = Color(hex: "1a2e26")
     static let inputDark = Color(hex: "23483c")
-    static let textSecondary = Color(hex: "9CA3AF")
+    static let textSecondaryBase = Color(hex: "9CA3AF")
     
     // Macro colors
     static let proteinColor = Color(hex: "60A5FA") // Blue
@@ -123,7 +123,33 @@ struct AppTheme {
     }
     
     static var textSecondary: Color {
-        Color.textSecondary
+        Color(UIColor { traitCollection in
+            if traitCollection.userInterfaceStyle == .dark {
+                return UIColor(Color.textSecondaryBase)
+            } else {
+                return UIColor(Color(hex: "4B5563"))
+            }
+        })
+    }
+
+    static var mutedFill: Color {
+        Color(UIColor { traitCollection in
+            if traitCollection.userInterfaceStyle == .dark {
+                return UIColor(white: 1.0, alpha: 0.12)
+            } else {
+                return UIColor(white: 0.0, alpha: 0.08)
+            }
+        })
+    }
+    
+    static var cardStroke: Color {
+        Color(UIColor { traitCollection in
+            if traitCollection.userInterfaceStyle == .dark {
+                return UIColor(white: 1.0, alpha: 0.05)
+            } else {
+                return UIColor(white: 0.0, alpha: 0.06)
+            }
+        })
     }
 }
 

@@ -14,6 +14,7 @@ import Combine
 class DashboardViewModel: ObservableObject {
     @Published var todayMetrics: DailyHealthMetrics?
     @Published var weeklyMetrics: [DailyHealthMetrics] = []
+    @Published var previousWeekMetrics: [DailyHealthMetrics] = []
     @Published var isLoading = false
     @Published var error: Error?
     @Published var showGoalCelebration = false
@@ -47,6 +48,31 @@ class DashboardViewModel: ObservableObject {
         guard !weeklyMetrics.isEmpty else { return 0 }
         let total = weeklyMetrics.reduce(0) { $0 + $1.steps }
         return total / weeklyMetrics.count
+    }
+    
+    var previousWeekAverage: Int {
+        guard !previousWeekMetrics.isEmpty else { return 0 }
+        let total = previousWeekMetrics.reduce(0) { $0 + $1.steps }
+        return total / previousWeekMetrics.count
+    }
+    
+    var weeklyComparisonPercentage: Double? {
+        guard !weeklyMetrics.isEmpty, !previousWeekMetrics.isEmpty else { return nil }
+        guard previousWeekAverage > 0 else { return nil }
+        
+        let currentAvg = Double(weeklyAverage)
+        let previousAvg = Double(previousWeekAverage)
+        let difference = currentAvg - previousAvg
+        let percentage = (difference / previousAvg) * 100.0
+        return percentage
+    }
+    
+    var weeklyComparisonText: (text: String, isAhead: Bool)? {
+        guard let percentage = weeklyComparisonPercentage else { return nil }
+        let isAhead = percentage >= 0
+        let absPercentage = abs(percentage)
+        let text = isAhead ? "\(Int(absPercentage))% ahead" : "\(Int(absPercentage))% behind"
+        return (text, isAhead)
     }
     
     var isGoalReached: Bool {
@@ -93,6 +119,9 @@ class DashboardViewModel: ObservableObject {
         // #region agent log
         DebugLogger.log(location: "DashboardViewModel.swift:loadData", message: "Weekly metrics received", data: ["count": weeklyMetrics.count], hypothesisId: "H")
         // #endregion
+        
+        // Fetch previous week metrics for comparison
+        previousWeekMetrics = await healthDataRepository.getPreviousWeekMetrics()
         
         isLoading = false
         
@@ -143,6 +172,7 @@ class DashboardViewModel: ObservableObject {
             
             todayMetrics = await healthDataRepository.getTodayMetrics()
             weeklyMetrics = await healthDataRepository.getLast7DaysMetrics()
+            previousWeekMetrics = await healthDataRepository.getPreviousWeekMetrics()
             
             // #region agent log
             print("DEBUG [DashboardViewModel]: Refresh complete - today: \(todayMetrics?.steps ?? -1) steps, weekly count: \(weeklyMetrics.count)")

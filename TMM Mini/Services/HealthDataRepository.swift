@@ -91,6 +91,29 @@ class HealthDataRepository {
         return cachedMetrics
     }
     
+    func getPreviousWeekMetrics() async -> [DailyHealthMetrics] {
+        let dates = Date.datesForPreviousWeek()
+        
+        // Get cached data first
+        var cachedMetrics: [DailyHealthMetrics] = []
+        for date in dates {
+            if let cached = getCachedMetrics(for: date) {
+                cachedMetrics.append(cached)
+            }
+        }
+        
+        // Refresh in background (optional - previous week data is less critical)
+        Task {
+            do {
+                try await refreshMetrics(for: dates)
+            } catch {
+                // Silently fail for previous week data
+            }
+        }
+        
+        return cachedMetrics
+    }
+    
     func refreshMetrics(for date: Date) async throws -> DailyHealthMetrics? {
         // #region agent log
         DebugLogger.log(location: "HealthDataRepository.swift:refreshMetrics", message: "Function called", data: ["date": date.description], hypothesisId: "G")
